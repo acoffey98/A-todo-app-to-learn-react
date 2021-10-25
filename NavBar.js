@@ -1,16 +1,24 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import alex from './alex.png';
 
-export class NavBar extends React.Component {
-  render() {
-    const pages = ['home', 'blog', 'pics', 'bio', 'art', 'shop', 'about', 'contact'];
-    const navLinks = pages.map(page => {
-      return (
-        <a href={'/' + page}>
-          {page}
-        </a>
-      )
-    });
 
-    return <nav>{navLinks}</nav>;
-  }
+class NavBar extends React.Component{
+    render(){
+
+        const firstName = "Alexandria ";
+
+        return (
+        <div> 
+            <h1> This is my NavBar</h1>
+            <ul> 
+                <li> Home page</li>
+                <li> Info </li>
+                <li> My Name is: {firstName} </li>
+                <img src="alex.png" />
+            </ul>
+        </div>
+        );
+    }
 }
+export default NavBar;
