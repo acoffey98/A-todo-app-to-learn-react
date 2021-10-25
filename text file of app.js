@@ -647,6 +647,143 @@ class Button extends React.Component {
 //Components interact 
 
 
+//We have seen render methods return <div> and <h1> JSX elements 
+//but they can also return another kind of JSX: Component instances
+//Such as:
+
+class OMG extends React.Component{
+  render(){
+    return <h1> Whoaaa! </h1>
+  }
+}
+
+class Crazy extends React.Component{
+  render(){
+    return <OMG />;   //renders the OMG class 
+  }
+}
+
+
+//Apply a Component in a Render function
+
+//Going to make a <ProfilePage /> render a <NavBar /> 
+//Make profiles page render method return a navbar 
+
+class ProfilePage extends React.Component {
+  render() {
+    return (
+      <div>
+      <NavBar />
+        <h1>All About Me!</h1>
+        <p>I like movies and blah blah blah blah blah</p>
+        <img src="https://content.codecademy.com/courses/React/react_photo-monkeyselfie.jpg" />
+      </div>
+    );
+  }
+}
+
+//Require a File
+//When you use React.js, every JavaScript file in your application is invisible to every other JavaScript file by default. 
+//ProfilePage.js and NavBar.js cant see each other 
+
+//So on line NavBar in ProfilePage.ks - javascript has no idea what navbar is...
+//If you want to use a varaible that is declared in a different file, you have to import the variable you want..
+//Use import statement
+
+import {NavBar} from './NavBar.js';
+
+//f you use an import statement, and the string at the end begins with either a dot or a slash, 
+//then import will treat that string as a filepath. import will follow that filepath, and import the file that it finds.
+
+//EXport 
+//I learned how to import (grab a variable) from a file other than the current open one..
+//When you import a variable from another file that is not the current file then import is not enough..
+//Need an export statement as well
+//export comes from ES6s module system
+
+//Named exports
+//In one file, place the keyword export immediately before something that you want to export 
+//The export can be any top-level var, let, const, function or class:
+
+
+export const faveManifestos = {
+  futurist: 'http://www.artype.de/Sammlung/pdf/russolo_noise.pdf',
+  agile: 'https://agilemanifesto.org/iso/en/manifesto.html',
+  cyborg:   'http://faculty.georgetown.edu/irvinem/theory/Haraway-CyborgManifesto-1.pdf'
+};
+
+//You can export multiple things from the same file 
+ 
+export const alsoRan = 'TimeCube';
+
+
+//EXAMPLE
+
+import {faveManifestos, alsoRan} from './Manifestos';
+
+//USE faneManifestos
+console.log('A cyborg Manifesto:  ${faveManifestos.cybord}');
+
+//Component rendering in Action
+//By nesting components inside other components, you can build complex architectures.
+
+//We have learned that a component can render another component 
+//Another way is that a component can pass information to another component
+//This can be done by using Props
+
+//Post component passing a prop to the Content component (Prop contains a string '../images/atom.png')
+//used to display an image
+
+//Every component has something called Props
+//A components props is an object. Holds information about that component
+//To see a components props - use this.props 
+//EXample:
+render() 
+{
+  console.log("Props object comin' up!");
+ 
+  console.log(this.props);
+ 
+  console.log("That was my props object!");
+ 
+  return <h1>Hello world</h1>;
+}
+
+//Here’s how to make a component display passed-in information:
+
+//1 - Find the component class that is going to receive that information.
+//2 - Include this.props.name-of-information in that component class’s render method’s return statement.
+
+//Pass a prop to a component by 
+<Greeting name="Alex" /> ;
+
+<Example firstName="sally" age={34} gender="female" />
+
+//Also learned how to access and display a passed-in prop:
+render()
+{
+  return <h1> This is my passed in prop {this.props.firstName} </h1>
+}
+
+//The most common use of props is to pass information to a component from a different component 
+//Pass a prop from one component to another 
+//props is the name of the object that stores passed-in information
+//this.props refers to the storage object 
+
+{/* <App /> cant pass a prop to <Greeting/> until App.js imports the variable Greeting! 
+Until theBestString, the characters <Greeting /> iin app.js doesnt mean anything
+ */}
+
+import {Greeting} from './Greeting.js';
+
+//In App.js import Greeting component (class name)
+//In the render method call the greeting component with props(ex: Name = "Alex")
+
+
+
+
+
+
 
 
 
