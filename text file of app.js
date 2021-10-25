@@ -234,6 +234,337 @@ ReactDOM.render(
 
 
 
+//Declare a new variable named math. Set math equal to a JSX <h1></h1> element.
+//Put the following text inside of the <h1>:
+
+const math = (
+    <h1> 
+       {2+3} = {2+3}
+    </h1>
+);
+
+
+//VARIABLES in JSX:
+const name = "Alexandria"
+
+//Accessing varaibles from inside the JSX expression
+
+const greeting = (
+    <p> Hello {name} ! </p>
+);
+
+
+//EXAMPLE
+//using curly braces - set the <h1> inner text equal to theBestString:
+const theBestString = 'tralalalala i am da best';
+
+ReactDOM.render(<h1> {theBestString} </h1> , document.getElementById('app'));
+
+//Variable attributes in JSX
+// Use a variable to set the `height` and `width` attributes:
+
+const sideLength = "300px";
+
+const panda = (
+    <img 
+        src = "images/panda.jpg"
+        alt="panda"
+        height = {sideLength}
+        width = {sideLength} />
+);
+
+//.map in JSX 
+//.map is an array method - .map() that often comes up
+//If you want to create a list of JSX elements, then .map() is best.
+//The map() method creates a new array with the results of calling a function for every array element.
+
+//The map method calls the callbackfn function one time for each element in the array.
+//Calls a defined callback function on each element of an array, and returns an array that contains the results.
+
+//Array of strings
+const strings = ['Home', 'Shop', 'Alexs house', 'About me'];
+
+//call .map on this array of strings and .map call returns a new array of <li> S.
+const listItems = strings.map(string => <li> {string} </li>);
+
+//{listItems} will evaluate to an array because its the returned value of.map().. 
+<ul> {listItems} </ul>;
+
+//EX:
+<ul>
+  <li> Item 1 </li>
+  <li> Item 2 </li>
+  <li> Item 3</li>
+</ul>
+
+const liItems = [
+  <li> Item 1 </li>,
+  <li> Item 2 </li>,
+  <li> Item 3</li>
+];
+<ul> {liItems} </ul>
+
+
+//Example 
+
+const people = ['Rowe', 'Prevost', 'Gare'];
+
+const peopleLis = people.map(person => <li> {person} </li>);
+  
+<ul> {people} </ul>
+
+);
+
+// ReactDOM.render goes here:
+ReactDOM.render(
+  <ul> {peopleLis}</ul>,
+  document.getElementById('app')
+);
+
+//getElementById(elementId: string): HTMLElement
+//String that specifies the ID value.
+//Returns a reference to the first object with the specified value of the ID attribute.
+
+
+//Keys
+//When you make a list in JSX you need to include something called keys..
+//JSX attribute = attributes name is key, the value should be something unique, similar to an id attribute
+//React uses them to keep track of lists
+//EX: 
+<ul>
+  <li key = "li-01"> Key one </li>
+  <li key = "li-02"> Key two </li>
+</ul>
+
+//NOT all lists need keys..
+//A list needs keys if one of the following are true:
+//The list items have memory from one render to the next..(when a to-do list renders, each item must remember whether it was checked off)
+//A lists oder might be shuffled (a search results might be shuffled from one render to the next)
+
+const people = ['Rowe', 'Prevost', 'Gare'];
+
+const peopleLis = people.map((person,i) => 
+  <li key={"person_"+i} > {person} </li>);
+  
+  <ul> {people} </ul>
+);
+
+// ReactDOM.render goes here:
+ReactDOM.render(
+  <ul> {peopleLis} </ul>,
+  document.getElementById('app')
+);
+
+
+
+//React.createElement 
+//const h1 = <h1> Hello World </h1> 
+//This can be written without any jsx - just in react 
+//Secretly every JSX element is a call to React.createCElement
+
+const h1 = React.createElement(
+  "h1", 
+  null,
+  "Hello world"
+);
+
+//React.createElement takes in 3 arguments: (component, props,...children)
+
+const greatestDivEver = React.createElement();
+
+//ex
+class Hello extends React.Component {
+  render() {
+    return <div> Hellow {this.props.toWhat} </div>
+  }
+}
+
+//can be compiled to this code that does not use JSX
+
+class Hello extends React.Component{
+  render(){
+    return React.createElement("div", null, 'Hello ${this.props.toWhat} ');
+  }
+}
+
+//OR if you get tired of writing React.createElement - you can assigned it to a variable e 
+//like this:
+
+const e = React.createElement();
+
+ReactDOM.render(
+  e("div", null, 'Hello World'),
+  document.getElementById('root')
+);
+
+//REACT COMPONENTS
+//A component is a small, reuseable chunk of code that is responsible for one job..
+//That job is often to render some HTMl
+
+//This example will create and render a new React Component 
+
+class MyComponentClass extends React.Component {
+  render() {
+    return <h1> Hellow World</h1>
+  }
+}
+
+ReactDOM.render(
+  <MyComponentClass />,
+  document.getElementById('app')
+
+);
+
+//import React from 'react'; this creates an object named React which contains methods nexxessary to use react library 
+//React.Component is a JavaScript class. 
+//to create your own component class you must SUBCLASS React.Component. 
+//React.Component is the way to declare a new component class.
+
+
+import React from 'react';    //React is a avascript object
+import ReactDOM from 'react-dom';    //ReactDOM is javascript object that allows you to interact with DOM - like render()
+ 
+class MyComponentClass extends React.Component {    //React.Compoent is a javascript class, MyComponentClass is a subclass of React.Component
+  render() {
+    return <h1>Hello world</h1>;
+  }
+}
+
+ReactDOM.render(
+	<MyComponentClass />, 
+	document.getElementById('app')
+);
+
+
+//Render function
+//name is render, and the value is a function. 
+//A render method MUST contain a return statement. Usually returns a JSX expression:
+
+class AlexsComponentClass extends React.Component{
+  render(){
+    return <h1> This is my first react class </h1>
+  }
+}
+
+//Create a component instance:
+//So now AlexsComponentClass is a working component class! Its ready to follow
+//some instructions and make some React Components 
+//To make a react component we write a JSX element. Instead of naming your JSX element something like 
+//h1 or div, give it the same name as your class. 
+
+
+//React component 
+<AlexsComponentClass /> 
+
+//Render a component:
+//Whenever you make a component, that component inherits all of the methods
+//of its components class. AlexsComponentClass has one method: render();
+//Therefore this react component also has this method
+
+ReactDOM.render(
+  <AlexsComponentClass />,
+  document.getElementById('app')
+);
+
+//USE multiline JSX in a component 
+<blockquote>
+  <p>
+    The world is full of objects, more or less interesting; I do not wish to add any more.
+  </p>
+  <cite>
+    <a target="_blank"
+      href="https://en.wikipedia.org/wiki/Douglas_Huebler">
+      Douglas Huebler
+    </a>
+  </cite>
+</blockquote>
+
+//Transform this into a react component
+
+class QuoteMaker extends React.Component{
+  render(){
+    <blockquote> 
+      <p> 
+        The world is full of objects, more or less interesting; I do not wish to add any more. 
+      </p>
+      <cite>
+      <a target="_blank"
+        href="https://en.wikipedia.org/wiki/Douglas_Huebler">
+        Douglas Huebler
+    </a>
+  </cite>
+    </blockquote>
+
+  }
+}
+ReactDOM.render(
+  <QuoteMaker />, 
+  document.getElementById('app')
+);
+
+
+//Use a variable attribute in a component 
+const redPanda = {
+  src: 'https://upload.wikimedia.org/wikipedia/commons/b/b2/Endangered_Red_Panda.jpg',
+  alt: 'Red Panda',
+  width: '200px
+};
+
+//How could you render a React Component, and get a picture with redPandas properites?
+
+//Put logic in a render function
+//A render () function must have a return statement. 
+
+const friends = [
+  {
+    title: "Yummmmmmm",
+    src: "https://content.codecademy.com/courses/React/react_photo-monkeyweirdo.jpg"
+  },
+  {
+    title: "Hey Guys!  Wait Up!",
+    src: "https://content.codecademy.com/courses/React/react_photo-earnestfrog.jpg"
+  },
+  {
+    title: "Yikes",
+    src: "https://content.codecademy.com/courses/React/react_photo-alpaca.jpg"
+  }
+];
+
+// New component class starts here:
+class Friend extends React.Component{
+  render(){
+    const friend = friends[1];
+    return (
+      <div> 
+        <h1>{friend.title}</h1>
+        <img src = {friend.src} />
+      </div>
+    );
+  }
+}
+
+
+ReactDOM.render(
+  <Friend />,
+  document.getElementById('app')
+);
+
+//Use a conditional in a Render Function
+//see file TodaysPlan.js
+
+const fiftyFifty = Math.random() < 0.5;
+
+// New component class starts here:
+class TonightsPlan extends React.Component{
+  render(){
+    let tonightsPlan;
+    
+  }
+}
+
+
+
+
 
 
 
