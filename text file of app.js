@@ -562,6 +562,90 @@ class TonightsPlan extends React.Component{
   }
 }
 
+//Use this in a Component:
+//The word "this" gets used in React a lot!!
+//ex:
+
+class IceCreamGuy extends React.Component {
+  get food() {
+    return 'ice cream';
+  }
+ 
+  render() {
+    return <h1>I like {this.food}.</h1>;
+  }
+}
+
+//The simple answer is that this refers to an instance of IceCreamGuy. 
+//The less simple answer is that this refers to the object on which this‘s enclosing method, in this case .render(), is called.
+//Let’s assume that this refers to an instance of your component class, as will be the case in all examples in this course. 
+//IceCreamGuy has two methods: .food and .render(). Since this will evaluate to an instance of IceCreamGuy, this.food will evaluate to a call of IceCreamGuy‘s .food method. 
+//This method will, in turn, evaluate to the string “ice cream.”
+//Why don’t you need parentheses after this.food? Shouldn’t it be this.food()?
+
+//You don’t need those parentheses because .food is a getter method. You can tell this from the get in the above class declaration body.
+
+
+class MyName extends React.Component {
+// name property goes here:
+get name(){
+  return 'Alexandria Coffey';
+}
+
+render() {
+  return <h1>My name is {this.name}</h1>;
+}
+}
+
+ReactDOM.render(
+      <MyName />, 
+      document.getElementById('app'));
+
+
+
+//USE an event listner in a component:
+//render functions often contain event listners
+//ex:
+render() {
+  return (
+    <div onHover={myFunc}>
+    </div>
+  );
+}
+//Recall that an event handler is a function that gets called in response to an event. 
+//In the above example, the event handler is myFunc().
+
+class MyClass extends React.Component{
+  myFunc(){
+      alert("STOP IT, Stop hovering")
+  }
+
+  render(){
+      return( 
+          <div> onHover = {this.myFunc} </div>
+      )
+  }
+}
+
+//The component class has two methods (myFunc and render)
+//myFunc is being used as an event handler
+//myFunc will be called any time a user hovers over the rendered <div> </div>
+
+class Button extends React.Component {
+  scream() {   //an event handler is a function that gets called in response to an event (so call scream when you click button)
+    alert('AAAAAAAAHHH!!!!!');      //when clicked show alert (AHHHHH")
+  }
+
+  render() {
+    return <button onClick = {this.scream} > !</button>;
+  }
+}
+
+//Components Interact 
+//A react application can contain dozens or hundreds of components
+//React apps are made out of components.. 
+//Components interact 
+
 
 
 
